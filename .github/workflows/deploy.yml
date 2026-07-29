@@ -45,6 +45,10 @@ jobs:
           # Öffentliche Werte hier eintragen oder als Repository-Variablen hinterlegen.
           # Secrets gehören NICHT hierher — alles mit VITE_-Präfix landet im Bundle.
           VITE_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+          # Repository-Variable, nicht Secret: Der Wert landet ohnehin im Bundle und ist
+          # auf der veröffentlichten Seite lesbar. Ein Secret würde hier Sicherheit
+          # vortäuschen, die es clientseitig nicht gibt.
+          VITE_COUPON_CODE: ${{ vars.VITE_COUPON_CODE }}
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
