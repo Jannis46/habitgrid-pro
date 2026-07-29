@@ -1,0 +1,9 @@
+# HabitGrid Pro
+User-agent: *
+Allow: /
+
+# Die App-Ansichten hinter dem Login enthalten keine indexierbaren Inhalte.
+Disallow: /app
+Disallow: /profil
+
+Sitemap: https://deine-domain.de/sitemap.xml

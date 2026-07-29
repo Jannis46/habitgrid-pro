@@ -1,0 +1,22 @@
+# Abhängigkeiten
+node_modules/
+
+# Build-Ergebnisse
+dist/
+dist-single/
+dev-dist/
+
+# Erzeugte Marken-Assets (entstehen bei jedem Build über npm run icons)
+public/icons/
+public/favicon.ico
+public/apple-touch-icon.png
+
+# Umgebung — enthält Gutscheincode und Schlüssel, gehört NIE ins Repository
+.env
+.env.local
+.env.*.local
+*.local
+
+# Betriebssystem
+.DS_Store
+Thumbs.db

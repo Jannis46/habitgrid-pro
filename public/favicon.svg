@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="HabitGrid">
+  <defs>
+    <linearGradient id="g" x1="8" y1="3" x2="26" y2="27" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10b981" />
+      <stop offset="1" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="7" fill="#0f172a" />
+  <path d="M15.44 3.12 L15.44 15.44 L3.12 15.44 Z" fill="url(#g)" />
+  <path d="M16.56 3.12 L28.88 15.44 L16.56 15.44 Z" fill="url(#g)" />
+  <path d="M16.56 28.88 L28.88 16.56 L16.56 16.56 Z" fill="url(#g)" opacity="0.85" />
+  <path d="M15.44 28.88 L15.44 16.56 L3.12 16.56 Z" stroke="#e2e8f0" stroke-width="1.5" stroke-linejoin="round" opacity="0.4" fill="none" />
+</svg>

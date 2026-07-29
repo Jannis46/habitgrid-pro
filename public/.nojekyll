@@ -1,0 +1,2 @@
+Diese Datei verhindert, dass GitHub Pages den Build durch Jekyll schickt.
+Ohne sie werden Verzeichnisse und Dateien mit führendem Unterstrich stillschweigend ausgelassen.

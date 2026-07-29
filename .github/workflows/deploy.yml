@@ -1,0 +1,62 @@
+# Baut die App bei jedem Push auf main und veröffentlicht sie auf GitHub Pages.
+#
+# Einmalige Einrichtung im Repository:
+#   Settings > Pages > Build and deployment > Source: "GitHub Actions"
+#
+# Der Basispfad wird hier aus dem Repository-Namen abgeleitet. Liegt die Seite unter
+# einer eigenen Domain oder als <user>.github.io, stattdessen VITE_BASE=/ setzen.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # erlaubt manuelles Auslösen über den Actions-Reiter
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Läuft ein Deployment bereits, wird es nicht abgebrochen — sonst könnte eine
+# halb veröffentlichte Seite zurückbleiben.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Tests
+        run: npm run check
+
+      - name: Build
+        env:
+          VITE_BASE: /${{ github.event.repository.name }}/
+          # Öffentliche Werte hier eintragen oder als Repository-Variablen hinterlegen.
+          # Secrets gehören NICHT hierher — alles mit VITE_-Präfix landet im Bundle.
+          VITE_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
